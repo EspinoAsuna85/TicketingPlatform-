@@ -27,5 +27,16 @@ contract TicketingPlatform is ERC721, Ownable {
     constructor(string memory _name, string memory _symbol, uint256 _ticketPrice) ERC721(_name, _symbol) {
         ticketPrice = _ticketPrice;
     }
+function purchaseTicket(uint256 _eventId) external payable {
+        require(msg.value == ticketPrice, "Incorrect ticket price");
+
+        uint256 ticketId = nextTicketId;
+        nextTicketId++;
+
+        _safeMint(msg.sender, ticketId);
+        ticketEvent[ticketId] = _eventId;
+
+        emit TicketPurchased(msg.sender, ticketId, _eventId);
+    }
 
 }
