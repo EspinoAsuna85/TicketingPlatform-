@@ -45,4 +45,12 @@ function redeemTicket(uint256 _ticketId) external onlyTicketOwner(_ticketId) tic
 
         emit TicketRedeemed(msg.sender, _ticketId);
     }
+
+function setTicketPrice(uint256 _newPrice) external onlyOwner {
+        ticketPrice = _newPrice;
+    }
+
+    function getTicketEvent(uint256 _ticketId) external view returns (uint256) {
+        return ticketEvent[_ticketId];
+    }
 }
