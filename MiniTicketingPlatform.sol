@@ -38,5 +38,11 @@ function purchaseTicket(uint256 _eventId) external payable {
 
         emit TicketPurchased(msg.sender, ticketId, _eventId);
     }
+function redeemTicket(uint256 _ticketId) external onlyTicketOwner(_ticketId) ticketNotRedeemed(_ticketId) {
+        ticketRedeemed[_ticketId] = true;
 
+        // Additional logic for redeeming the ticket, e.g., granting access to an event
+
+        emit TicketRedeemed(msg.sender, _ticketId);
+    }
 }
